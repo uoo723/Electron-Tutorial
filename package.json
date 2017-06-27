@@ -22,10 +22,12 @@
     "electron-packager": "^8.7.2",
     "electron-react-devtools": "^0.4.0",
     "electron-rebuild": "^1.5.11",
+    "file-loader": "^0.11.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
     "node-libs-browser": "^2.0.0",
     "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0",
     "webpack-target-electron-renderer": "^0.4.0"
