@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import fs from "fs";
 import path from "path";
-import os from "os";
+import net from "net";
 
 class Main extends React.Component {
     constructor() {
@@ -129,10 +129,16 @@ class Form extends React.Component {
     }
 
     loadAndDisplayContacts() {
-        console.log('User Info: ' + JSON.stringify(os.userInfo()) + '\n'
-            + 'Platform: ' + os.platform() + '\n'
-            + 'User home directory: ' + os.homedir() + '\n'
-            + 'OS Architecture: ' + os.arch());
+        let client = net.connect({port: 3000}, () => {
+            console.log('Connection established!');
+        });
+        client.on('data', data => {
+            alert(data.toString());
+            client.end();
+        });
+        client.on('end', () => {
+            console.log('Disconnected :(');
+        });
         if (fs.existsSync(this.state.filename)) {
             let data = fs.readFileSync(this.state.filename, 'utf8');
             let rows = JSON.parse(data);
