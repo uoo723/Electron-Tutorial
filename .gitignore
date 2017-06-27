@@ -6,3 +6,6 @@ package-lock.json
 
 # auto-generated from webpack
 bundle.js
+
+# data files
+data/

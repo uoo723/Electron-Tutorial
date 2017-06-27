@@ -5,7 +5,7 @@ const webpack = require('webpack');
 // const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 
 module.exports = {
-    // target: 'electron-main',
+    target: 'electron-main',
     entry: {
         app: ['webpack/hot/dev-server', './src/index.js'],
         // main: './main.js'
@@ -74,7 +74,9 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
-            jQuery: "jquery"
+            $: "jquery",
+            jQuery: "jquery",
+            Tether: 'tether'
         }),
         // new webpack.optimize.UglifyJsPlugin()
     ]
