@@ -1,0 +1,38 @@
+{
+  "name": "electron-tutorial",
+  "version": "1.0.0",
+  "description": "This is Electron tutorial project.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "webpack",
+    "watch": "webpack-dev-server",
+    "electron-rebuild": "electron-rebuild"
+  },
+  "author": "Sangwoo Han",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "electron": "^1.6.11",
+    "electron-packager": "^8.7.2",
+    "electron-rebuild": "^1.5.11",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4",
+    "node-libs-browser": "^2.0.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-target-electron-renderer": "^0.4.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
