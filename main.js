@@ -1,7 +1,7 @@
 const {app, BrowserWindow} = require('electron')
 const url = require('url')
 const path = require('path')
-
+// require('electron-react-devtools').install()
 let win
 
 function createWindow() {
@@ -12,7 +12,7 @@ function createWindow() {
         slashes: true
     }));
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
     win.on('closed', () => {
         win = null;
     });
