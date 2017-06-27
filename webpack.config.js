@@ -7,17 +7,18 @@ const webpack = require('webpack');
 module.exports = {
     // target: 'electron-main',
     entry: {
-        app: ['webpack/hot/dev-server', './src/index.js']
+        app: ['webpack/hot/dev-server', './src/index.js'],
+        // main: './main.js'
     },
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: 'http://localhost:8080/dist/'
     },
-    devServer: {
-        contentBase: './dist',
-        publicPath: 'http://localhost:8080/dist/'
-    },
+    // devServer: {
+    //     contentBase: path.join(__dirname, 'dist'),
+    //     compress: true,
+    // },
     module: {
         rules: [
             {
@@ -26,28 +27,26 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ['react']
+                        presets: ['env', 'react']
                     }
                 }
             },
             {
                 test: /\.css$/,
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader'},
-                ]
+                use: [ 'style-loader', 'css-loader' ],
             },
             {
                 test: /\.less$/,
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' },
-                    { loader: 'less-loader' }
-                ]
+                use: [ 'style-loader', 'css-loader', 'less-loader' ],
             }
         ]
     },
+    devtool: "inline-source-map",
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            jQuery: "jquery"
+        }),
+        // new webpack.optimize.UglifyJsPlugin()
     ]
 };
