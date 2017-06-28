@@ -2,47 +2,47 @@ require('bootstrap/dist/js/bootstrap.min.js')
 require('bootstrap/dist/css/bootstrap.min.css')
 require('../less/main.less')
 
-'use strict';
+'use strict'
 
-import React from "react";
-import ReactDOM from "react-dom";
-import fs from "fs";
-import path from "path";
+import React from "react"
+import ReactDOM from "react-dom"
+import fs from "fs"
+import path from "path"
 
 class Main extends React.Component {
     constructor() {
-        super();
+        super()
     }
 
     render() {
         return (
             <Form />
-        );
+        )
     }
 }
 
 class Form extends React.Component {
     constructor() {
-        super();
+        super()
         this.state = {
             name: '',
             email: '',
             rows: [],
             filename: 'data/contacts',
-        };
+        }
 
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this)
+        this.handleChangeEmail = this.handleChangeEmail.bind(this)
     }
 
     componentDidMount() {
-        this.loadAndDisplayContacts();
+        this.loadAndDisplayContacts()
     }
 
     render() {
         const textAlignCenter = {
             textAlign: 'center',
-        };
+        }
         return (
             <div>
               <div className="form-group">
@@ -85,56 +85,56 @@ class Form extends React.Component {
                 </table>
               </div>
             </div>
-        );
+        )
     }
 
     handleChangeName(event) {
-        this.setState({name: event.target.value});
+        this.setState({name: event.target.value})
     }
 
     handleChangeEmail(event) {
-        this.setState({email: event.target.value});
+        this.setState({email: event.target.value})
     }
 
     deleteContact(index) {
-        let rows = this.state.rows.slice();
-        rows.splice(index, 1);
+        let rows = this.state.rows.slice()
+        rows.splice(index, 1)
         fs.writeFile(this.state.filename, JSON.stringify(rows), err => {
             if (err) {
-                console.log(err);
+                console.log(err)
             } else {
-                this.setState({rows: rows});
+                this.setState({rows: rows})
             }
-        });
+        })
     }
 
     contactClick() {
-        const name = this.state.name;
-        const email = this.state.email;
+        const name = this.state.name
+        const email = this.state.email
 
-        this.addEntry(name, email);
+        this.addEntry(name, email)
     }
 
     addEntry(name, email) {
         if (name && email) {
-            let rows = this.state.rows.slice();
-            rows.push({name: name, email: email});
-            this.setState({name: '', email: '', rows: rows});
+            let rows = this.state.rows.slice()
+            rows.push({name: name, email: email})
+            this.setState({name: '', email: '', rows: rows})
             fs.writeFile(this.state.filename, JSON.stringify(rows), err => {
                 if (err)
-                    console.log(err);
+                    console.log(err)
             })
         }
     }
 
     loadAndDisplayContacts() {
         if (fs.existsSync(this.state.filename)) {
-            let data = fs.readFileSync(this.state.filename, 'utf8');
-            let rows = JSON.parse(data);
-            this.setState({rows: rows});
+            let data = fs.readFileSync(this.state.filename, 'utf8')
+            let rows = JSON.parse(data)
+            this.setState({rows: rows})
         }
     }
 }
 
 ReactDOM.render(<Main />,
-document.getElementById('root'));
+document.getElementById('root'))
