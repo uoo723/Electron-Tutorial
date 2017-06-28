@@ -8,10 +8,35 @@ import React from "react";
 import ReactDOM from "react-dom";
 import fs from "fs";
 import path from "path";
+import {remote} from "electron";
 
+const {Menu, MenuItem} = remote
+
+const menu = new Menu
+
+menu.append(new MenuItem({
+    label: "MenuItem1",
+    click() {
+        console.log('item 1 clicked')
+    }
+}))
+
+menu.append(new MenuItem({type: 'separator'}))
+menu.append(new MenuItem({label: 'MenuItem2', type: 'checkbox', checked: true}))
+menu.append(new MenuItem({
+    label: 'MenuItem3',
+    click() {
+        console.log('item 3 clicked')
+    }
+}))
+
+window.addEventListener('contextmenu', e => {
+    e.preventDefault()
+    menu.popup(remote.getCurrentWindow())
+}, false)
 class Main extends React.Component {
     constructor() {
-        super();
+        super()
     }
 
     render() {
@@ -23,20 +48,20 @@ class Main extends React.Component {
 
 class Form extends React.Component {
     constructor() {
-        super();
+        super()
         this.state = {
             name: '',
             email: '',
             rows: [],
             filename: 'data/contacts',
-        };
+        }
 
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
     }
 
     componentDidMount() {
-        this.loadAndDisplayContacts();
+        this.loadAndDisplayContacts()
     }
 
     render() {
