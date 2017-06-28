@@ -8,7 +8,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import fs from "fs";
 import path from "path";
-import {ipcRenderer} from "electron";
 
 class Main extends React.Component {
     constructor() {
@@ -139,11 +138,3 @@ class Form extends React.Component {
 
 ReactDOM.render(<Main />,
 document.getElementById('root'));
-
-ipcRenderer.send('openFile', () => {
-    console.log("Event sent.");
-});
-
-ipcRenderer.on('fileData', (event, data) => {
-    console.log(data);
-});

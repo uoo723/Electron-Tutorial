@@ -1,7 +1,6 @@
 const {app, BrowserWindow} = require('electron')
 const url = require('url')
 const path = require('path')
-const {ipcMain} = require("electron")
 
 let win
 
@@ -31,26 +30,3 @@ app.on('activate', () => {
         createWindow();
     }
 });
-
-ipcMain.on('openFile', (event, path) => {
-    const {dialog} = require('electron')
-    const fs = require('fs')
-    dialog.showOpenDialog(fileNames => {
-        if (fileNames === undefined) {
-            console.log("No file selected");
-        } else {
-            readFile(fileNames[0]);
-        }
-    });
-
-    function readFile(filepath) {
-        fs.readFile(filepath, 'utf-8', (err, data) => {
-            if (err) {
-                alert("An erro aocurred reading the file : " + err.message);
-                return;
-            }
-
-            event.sender.send('fileData', data);
-        })
-    }
-})
